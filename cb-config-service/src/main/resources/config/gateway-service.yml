@@ -1,0 +1,16 @@
+server:
+  port: 8060
+
+spring:
+  application:
+    name: gateway-sevice
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: person-service
+          uri: lb://person-service
+          predicates:
+            - Path=/person/**
