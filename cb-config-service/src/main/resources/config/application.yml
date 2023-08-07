@@ -1,17 +1,13 @@
 spring:
   datasource:
-    #    url: jdbc:h2:mem:testdb
-    url: jdbc:h2:file:./testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: ''
-  h2:
-    console:
-      enabled: true
+    url: jdbc:mysql://localhost:3306/core_banking_microservice
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: banking
+    password: 123654
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
     properties:
       hibernate:
+        dialec: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
     hibernate:
       ddl-auto: update

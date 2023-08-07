@@ -29,6 +29,7 @@
         <spring.cloud.config.server.version>4.0.4</spring.cloud.config.server.version>
         <spring.cloud.dependencies.version>2022.0.4</spring.cloud.dependencies.version>
         <spring.cloud.starter.bootstrap.version>4.0.4</spring.cloud.starter.bootstrap.version>
+        <mysql.connector.java.version>8.0.33</mysql.connector.java.version>
     </properties>
 
     <dependencies>
@@ -57,9 +58,11 @@
         </dependency>
 
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.connector.java.version}</version>
         </dependency>
+
 
     </dependencies>
 
