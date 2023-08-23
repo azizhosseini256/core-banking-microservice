@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/core_banking_microservice
+    url: jdbc:mysql://localhost:3306/core_banking_microservice_db
     driverClassName: com.mysql.cj.jdbc.Driver
     username: banking
     password: 123654
