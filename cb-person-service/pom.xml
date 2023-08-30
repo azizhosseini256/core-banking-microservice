@@ -19,9 +19,9 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>cb-person-service</artifactId>
+    <artifactId>cb-realPerson-service</artifactId>
     <version>1.0</version>
-    <name>cb-person-service</name>
+    <name>cb-realPerson-service</name>
     <description>simple sample example microservice project as core banking</description>
 
     <properties>

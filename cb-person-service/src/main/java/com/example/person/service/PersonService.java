@@ -1,21 +1,19 @@
 package com.example.person.service;
 
-import com.example.person.domain.Person;
-import com.example.person.model.PersonModel;
-
+import com.example.person.domain.RealPerson;
+import com.example.person.model.RealPersonModel;
 import java.util.List;
 
 public interface PersonService {
 
-    PersonModel save(PersonModel model);
+    RealPersonModel save(RealPersonModel model);
 
-    PersonModel update(PersonModel model);
+    RealPersonModel update(RealPersonModel model, String nationalNumber);
 
-    void delete (long personNationalCode);
+    RealPersonModel findRalPersonByNationalNumber(String realPersonNationalNumber);
 
-    PersonModel findByNationalNumber(String nationalNumber);
+    void deleteRealPersonByNationalNumber(String realPersonNationalNumber);
 
-    List<Person> findAll();
-
+    List<RealPerson> findAll();
 
 }

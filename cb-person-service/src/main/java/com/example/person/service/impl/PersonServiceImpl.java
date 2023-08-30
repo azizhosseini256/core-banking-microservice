@@ -1,54 +1,66 @@
 package com.example.person.service.impl;
 
-import com.example.person.dao.PersonRepository;
-import com.example.person.domain.Person;
-import com.example.person.model.PersonModel;
+import com.example.person.dao.RealPersonRepository;
+import com.example.person.domain.RealPerson;
+import com.example.person.model.RealPersonModel;
 import com.example.person.service.PersonService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
+@Transactional
 public class PersonServiceImpl implements PersonService {
 
     @Autowired
-    private PersonRepository personRepository;
+    private RealPersonRepository realPersonRepository;
 
     @Override
-    public PersonModel save(PersonModel model) {
+    public RealPersonModel save(RealPersonModel model) {
+        RealPerson person = new RealPerson();
 
-        Person person = Person.builder()
-                .firstName(model.getFirstName())
-                .lastName(model.getLastName())
-                .age(model.getAge())
-                .nationalNumber(model.getNationalNumber())
-                .email(model.getEmail())
-                .address(model.getAddress())
-                .phoneNumber(model.getPhoneNumber())
-                .build();
+        person.setFirstName(model.getFirstName());
+        person.setLastName(model.getLastName());
+        person.setNationalNumber(model.getNationalNumber());
+        person.setBirthDate(model.getBirthDate());
+        person.setEmail(model.getEmail());
+        person.setAddress(model.getAddress());
+        person.setPhoneNumber(model.getPhoneNumber());
 
-        personRepository.save(person);
+        realPersonRepository.save(person);
+
         return model;
     }
 
     @Override
-    public PersonModel update(PersonModel model) {
+    public RealPersonModel update(RealPersonModel model, String nationalNumber) {
         return null;
     }
 
     @Override
-    public void delete(long personNationalCode) {
+    public RealPersonModel findRalPersonByNationalNumber(String realPersonNationalNumber) {
+
+        RealPersonModel model = new RealPersonModel();
+        RealPerson person = realPersonRepository.findRealPersonByNationalNumber(realPersonNationalNumber);
+
+        if (person!=null){
+
+            BeanUtils.copyProperties(person,model);
+
+            return model;
+        } else return null;
 
     }
 
     @Override
-    public PersonModel findByNationalNumber(String nationalNumber) {
-        return null;
+    public void deleteRealPersonByNationalNumber(String realPersonNationalNumber) {
+        realPersonRepository.deleteRealPersonByNationalNumber(realPersonNationalNumber);
     }
 
     @Override
-    public List<Person> findAll() {
-        return personRepository.findAll();
+    public List<RealPerson> findAll() {
+        return realPersonRepository.findAll();
     }
 }
