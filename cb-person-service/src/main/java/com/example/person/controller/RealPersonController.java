@@ -17,7 +17,7 @@ public class RealPersonController {
     @Autowired
     private PersonService realPersonService;
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<RealPersonModel> save (@RequestBody @Valid RealPersonModel model){
         return ResponseEntity.ok(realPersonService.save(model));
     }
@@ -40,12 +40,6 @@ public class RealPersonController {
     @GetMapping("/find-by-national-number/{nationalNumber}")
     public ResponseEntity<RealPersonModel> findRalPersonByNationalNumber(@PathVariable String nationalNumber){
         return ResponseEntity.ok(realPersonService.findRalPersonByNationalNumber(nationalNumber));
-    }
-
-
-    @GetMapping("/all")
-    public List<RealPerson> all(){
-        return realPersonService.findAll();
     }
 
 }

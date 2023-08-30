@@ -36,7 +36,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public RealPersonModel update(RealPersonModel model, String nationalNumber) {
-        return null;
+        return null; //TODO correct it
     }
 
     @Override
@@ -46,9 +46,7 @@ public class PersonServiceImpl implements PersonService {
         RealPerson person = realPersonRepository.findRealPersonByNationalNumber(realPersonNationalNumber);
 
         if (person!=null){
-
             BeanUtils.copyProperties(person,model);
-
             return model;
         } else return null;
 
@@ -57,10 +55,5 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public void deleteRealPersonByNationalNumber(String realPersonNationalNumber) {
         realPersonRepository.deleteRealPersonByNationalNumber(realPersonNationalNumber);
-    }
-
-    @Override
-    public List<RealPerson> findAll() {
-        return realPersonRepository.findAll();
     }
 }
