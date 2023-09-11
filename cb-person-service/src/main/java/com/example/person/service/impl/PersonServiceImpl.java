@@ -8,7 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 @Transactional
@@ -19,8 +19,8 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public RealPersonModel save(RealPersonModel model) {
-        RealPerson person = new RealPerson();
 
+        RealPerson person = new RealPerson();
         person.setFirstName(model.getFirstName());
         person.setLastName(model.getLastName());
         person.setNationalNumber(model.getNationalNumber());
@@ -31,12 +31,13 @@ public class PersonServiceImpl implements PersonService {
 
         realPersonRepository.save(person);
 
-        return model;
+        return findRalPersonByNationalNumber(model.getNationalNumber());
     }
 
     @Override
-    public RealPersonModel update(RealPersonModel model, String nationalNumber) {
-        return null; //TODO correct it
+    public RealPersonModel update(RealPersonModel model) {
+        realPersonRepository.updateRealPersonByNationalNumber(model);
+        return findRalPersonByNationalNumber(model.getNationalNumber());
     }
 
     @Override
