@@ -5,26 +5,25 @@ import com.example.person.model.RealPersonModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Repository
 public interface RealPersonRepository extends JpaRepository<RealPerson, Long> {
 
-    // TODO fix this method
     @Modifying
     @Query(value = """
-            update real_person p
-            set p.first_name         =?1
-              , p.last_name            =?2
-              , p.national_number      =?3
-              , p.birth_date            =?4
-              , p.email               =?5
-              , p.address             =?6
-              , p.phone_number         =?7
-            where p.national_number  =?3
-            """, nativeQuery = true)
-    void updateRealPersonByNationalNumber(@RequestBody RealPersonModel model);
+        UPDATE real_person p SET
+        p.first_name =      :#{#model.firstName},
+        p.last_name =       :#{#model.lastName},
+        p.national_number = :#{#model.nationalNumber},
+        p.birth_date =      :#{#model.birthDate},
+        p.email =           :#{#model.email},
+        p.address =         :#{#model.address},
+        p.phone_number =    :#{#model.phoneNumber}
+        WHERE p.national_number = :oldNationalNumber
+        """, nativeQuery = true)
+    void updateRealPersonByNationalNumber(@Param("model") RealPersonModel model, @Param("oldNationalNumber") String oldNationalNumber);
 
     @Modifying
     void deleteRealPersonByNationalNumber(String nationalNumber);

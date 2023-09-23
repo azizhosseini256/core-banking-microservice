@@ -35,8 +35,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public RealPersonModel update(RealPersonModel model) {
-        realPersonRepository.updateRealPersonByNationalNumber(model);
+    public RealPersonModel update(RealPersonModel model, String oldNationalNumber) {
+        realPersonRepository.updateRealPersonByNationalNumber(model, oldNationalNumber);
         return findRalPersonByNationalNumber(model.getNationalNumber());
     }
 

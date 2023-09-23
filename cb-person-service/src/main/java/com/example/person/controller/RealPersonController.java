@@ -19,10 +19,9 @@ public class RealPersonController {
         return ResponseEntity.ok(realPersonService.save(model));
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<RealPersonModel> updateByNationalNumber(@RequestBody @Valid RealPersonModel model){
-
-        return ResponseEntity.ok(realPersonService.update(model));
+    @PutMapping("/update/{oldNationalNumber}")
+    public ResponseEntity<RealPersonModel> updateByNationalNumber(@RequestBody @Valid RealPersonModel model, @PathVariable String oldNationalNumber){
+        return ResponseEntity.ok(realPersonService.update(model, oldNationalNumber));
     }
 
     @DeleteMapping("/delete-by-national-number/{nationalNumber}")
