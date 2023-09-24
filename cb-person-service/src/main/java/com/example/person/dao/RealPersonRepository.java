@@ -5,7 +5,6 @@ import com.example.person.model.RealPersonModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -23,7 +22,7 @@ public interface RealPersonRepository extends JpaRepository<RealPerson, Long> {
         p.phone_number =    :#{#model.phoneNumber}
         WHERE p.national_number = :oldNationalNumber
         """, nativeQuery = true)
-    void updateRealPersonByNationalNumber(@Param("model") RealPersonModel model, @Param("oldNationalNumber") String oldNationalNumber);
+    void updateRealPersonByNationalNumber(RealPersonModel model, String oldNationalNumber);
 
     @Modifying
     void deleteRealPersonByNationalNumber(String nationalNumber);
